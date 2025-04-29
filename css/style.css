@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* 스크롤바 없앰 */
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s ease-in-out;
+}
+
+section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #fff;
+    background-size: cover;
+}
+
+.section:nth-child(1) {
+    background-image: url(../img/main.png);
+}
+
+.section:nth-child(2) {
+    background-image: url(../img/sec01.png);
+}
+
+.section:nth-child(3) {
+    background-image: url(../img/sec02_1.png);
+
+}
+
+.section:nth-child(4) {
+    background-image: url(../img/sec03.png);
+}
+
+.section:nth-child(5) {
+    background-image: url(../img/sec04.png);
+}
+
+.section:nth-child(6) {
+    background-image: url(../img/sec05.png);
+}
+
+.section:nth-child(7) {
+    background-image: url(../img/sec06.png);
+}
