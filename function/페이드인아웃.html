@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>잊힌 작가의 공간</title>
+    <style>
+        section {
+            padding: 2rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .story {
+            position: relative;
+            height: 300px; /* 내용 높이에 따라 조정 */
+            overflow: hidden;
+        }
+
+        .story_div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            z-index: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .story_div.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .cover {
+            margin-bottom: 1rem;
+        }
+
+        .cover strong {
+            font-size: 1.2rem;
+            display: block;
+        }
+
+        .cover p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .story_text {
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <h3>잊힌 작가의 공간</h3>
+        <div class="story">
+            <div class="story_div active">
+                <div class="cover">
+                    <strong>눈사람 자살사건</strong>
+                    <p>최승호</p>
+                </div>
+                <div class="story_text">
+                    그날 눈사람은 텅 빈 욕조에 누워있었다. <br>
+                    뜨거운 물을 틀기 전에 그는 더 살아야 하는지 말아야 하는지<br>
+                    곰곰이 생각해 보았다.<br><br>
+
+                    더 살아야 할 이유가 없다는 것이<br>
+                    자살의 이유가 될 수는 없었으며<br>
+                    죽어야 할 이유가 없다는 것이 사는 이유 또한 될 수 없었다.<br>
+                    죽어야 할 이유도 없었고 더 살아야 할 이유도 없었다.
+                </div>
+            </div>
+            <div class="story_div">
+                <div class="cover"></div>
+                <div class="story_text">
+                    아무런 이유 없이 텅 빈 욕조에 혼자 누워 있을 때<br>
+                    뜨거운 물과 찬 물 중에서 어떤 물을 틀어야 하는 것일까.<br>
+                    눈사람은 그 결과는 같은 것이라고 생각했다.<br>
+                    뜨거운 물에는 빨리 녹고 찬물에는 좀 천천히 녹겠지만<br>
+                    녹아 사라진다는 점에서는 다를 게 없었다.
+                </div>
+            </div>
+            <div class="story_div">
+                <div class="cover"></div>
+                <div class="story_text">
+                    나는 따뜻한 물에 녹고 싶다.<br>
+                    오랫동안 너무 춥게만 살지 않았는가.<br>
+                    눈사람은 온수를 틀고 자신의 몸이 점점 녹아<br>
+                    물이 되는 것을 지켜보다 잠이 들었다.<br>
+                    욕조에서는 무럭무럭 김이 피어올랐다.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const stories = document.querySelectorAll(".story_div");
+            let current = 0;
+
+            function showSlide(index) {
+                stories.forEach((el, i) => {
+                    el.classList.remove("active");
+                });
+                stories[index].classList.add("active");
+            }
+
+            setInterval(() => {
+                current = (current + 1) % stories.length;
+                showSlide(current);
+            }, 4000); // 4초 간격 (1.5초 fade 포함 고려)
+        });
+    </script>
+</body>
+</html>
