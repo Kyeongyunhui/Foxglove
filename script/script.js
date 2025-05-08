@@ -150,8 +150,12 @@ paragraphs.forEach(p => {
     p.addEventListener("click", () => {
         const name = p.getAttribute("data-name");
         const content = document.getElementById(name);
+
         if (content) {
+            // ✅ popup 안에 내용만 복사
             popupContainer.innerHTML = content.innerHTML;
+
+            // ✅ 팝업 표시
             popup.style.display = "block";
             overlay.style.display = "block";
         }
@@ -161,4 +165,43 @@ paragraphs.forEach(p => {
 function closePopup() {
     popup.style.display = "none";
     overlay.style.display = "none";
+
+    // 혹시나 나중에 필요 없을 경우 비워주기 (선택사항)
+    // popupContainer.innerHTML = '';
 }
+
+// 슬라이드
+
+const track = document.getElementById('track');
+const items = Array.from(track.children);
+
+// 최소 2배 분량 이상 복제 (자연스러운 반복을 위해)
+items.forEach(item => {
+  const clone = item.cloneNode(true);
+  track.appendChild(clone);
+});
+items.forEach(item => {
+  const clone = item.cloneNode(true);
+  track.appendChild(clone);
+});
+
+// 글리치
+
+function glitch(element) {
+    setInterval(()=>{
+        // element::before
+        const top1 = Math.random() * 100
+        const btm1 = Math.random() * 100
+        // element::after
+        const top2 = Math.random() * 100
+        const btm2 = Math.random() * 100
+
+        element.style.setProperty('--t1', `${top1}%`)
+        element.style.setProperty('--bt1', `${btm1}%`)
+        element.style.setProperty('--t2', `${top2}%`)
+        element.style.setProperty('--b2', `${btm1}%`)
+    },100)
+}
+
+const text = document.querySelector('.sec06_text')
+glitch(text)

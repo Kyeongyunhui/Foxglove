@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
   <title>잊힌 작가의 공간</title>
@@ -21,7 +20,7 @@
       position: relative;
     }
 
-    .book_animate .slider-track {
+    .slider-track {
       display: flex;
       width: max-content;
       animation: scroll 40s linear infinite;
@@ -30,7 +29,7 @@
     .book_animate li {
       flex: 0 0 auto;
       width: 100px;
-      margin-right: 40px;
+      margin-right: 16px;
     }
 
     .book_animate img {
@@ -44,7 +43,6 @@
       0% {
         transform: translateX(0);
       }
-
       100% {
         transform: translateX(-50%);
       }
@@ -57,7 +55,6 @@
     }
   </style>
 </head>
-
 <body>
 
   <section class="section">
@@ -67,7 +64,7 @@
       계속 여행하세요.
     </p>
     <div class="book_animate">
-      <ul class="slider-track">
+      <ul class="slider-track" id="track">
         <li><img src="../img/sec05_1.png" alt=""></li>
         <li><img src="../img/sec05_2.png" alt=""></li>
         <li><img src="../img/sec05_3.png" alt=""></li>
@@ -81,8 +78,14 @@
   </section>
 
   <script>
-    const track = document.querySelector('.slider-track');
+    const track = document.getElementById('track');
     const items = Array.from(track.children);
+    
+    // 최소 2배 분량 이상 복제 (자연스러운 반복을 위해)
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      track.appendChild(clone);
+    });
     items.forEach(item => {
       const clone = item.cloneNode(true);
       track.appendChild(clone);
@@ -90,5 +93,4 @@
   </script>
 
 </body>
-
 </html>
