@@ -1,0 +1,146 @@
+/* 테블릿 뷰 */
+@media (max-width: 1024px) {
+
+    /* 메인페이지 */
+    .main>div>button {
+        display: none;
+    }
+
+    .main>div>h1 {
+        font-size: 70px;
+        margin-bottom: 40px;
+    }
+
+    .content {
+        width: 500px;
+        font-size: 14px;
+    }
+
+    .logo {
+        width: 200px;
+    }
+
+    .logo>p {
+        font-size: 16px;
+    }
+
+    .down_button {
+        display: none;
+    }
+
+    /* 첫번째세션-소개페이지 */
+
+    .sec01_textBox>h2 {
+        font-size: 34px;
+    }
+
+    .sec01_textBox>p {
+        font-size: 16px;
+    }
+
+    /* 별빛 아래 시집 코너 */
+
+    h2 {
+        margin-top: 120px;
+        margin-left: 60px;
+        font-size: 28px;
+        font-weight: 400;
+    }
+
+    .sec02_div {
+        width: 852px;
+        height: 540px;
+        margin-top: 170px;
+    }
+
+    .sec02_pages .page.active {
+        width: 674px;
+        height: 540px;
+    }
+
+    .page>figure {
+        width: 200px;
+        height: 540px;
+    }
+
+    .tab_div>ul>li {
+        width: 180px;
+        height: 135px;
+    }
+
+    .page_text {
+        width: 380px;
+        height: 360px;
+        margin: 40px 50px 40px 50px;
+    }
+
+    .page_text>h3 {
+        font-size: 24px;
+        margin-bottom: 32px;
+    }
+
+    .page_text>strong {
+        font-size: 18px;
+    }
+
+    .page_text>p {
+        font-size: 16px;
+        margin-top: 100px;
+        line-height: 26px;
+    }
+
+    .tab_div>ul>li>p {
+        font-size: 16px;
+        line-height: 140px;
+    }
+
+
+    /* 잊힌 작가의 공간 */
+
+    .text_div {
+        top: 68%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 800px;
+        height: 800px;
+    }
+
+    .text_div>div {
+        margin: 20px 0;
+    }
+
+    .text_div p {
+        font-size: 30px;
+        padding: 32px 5px;
+    }
+
+    /* 오늘의 추천 이야기 */
+
+    .story {
+        width: 820px;
+    }
+
+
+    /* 책 속에서 여행은 어땠나요? */
+    .sec05_textbox>h2 {
+        margin: 0;
+        margin-bottom: 50px;
+        font-size: 32px;
+    }
+
+    .sec05_textbox>p {
+        font-size: 18px;
+        line-height: 32px;
+    }
+
+    .book_animate {
+        bottom: 180px;
+    }
+
+    .book_animate>ul>li {
+        width: 120px;
+        height: 200px;
+    }
+
+    
+}

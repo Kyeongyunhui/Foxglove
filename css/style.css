@@ -68,6 +68,8 @@ h2 {
 .section.first {
     background-image: url(../img/main.png);
     position: relative;
+    background-position: center center;
+
 }
 
 .logo {
@@ -126,7 +128,11 @@ h2 {
 
 .section.second {
     background-image: url(../img/sec01.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     position: relative;
+    background-position: center center;
+
 }
 
 .sec01_textBox {
@@ -181,6 +187,8 @@ h2 {
 .section.third {
     background-image: url(../img/sec02.png);
     position: relative;
+    background-position: center center;
+
 }
 
 .sec02_pages .page {
@@ -272,6 +280,23 @@ h2 {
     color: #ffffff;
 }
 
+.page>figure {
+    width: 320px;
+    height: 692px;
+}
+
+#tab_4>figure {
+    background-image: url(../img/sec02_4.png);
+}
+#tab_3>figure {
+    background-image: url(../img/sec02_3.png);
+}
+#tab_2>figure {
+    background-image: url(../img/sec02_2.png);
+}
+#tab_1>figure {
+    background-image: url(../img/sec02_1.png);
+}
 
 .tab_div>ul>li:nth-child(1) {
     background-image: url(../img/tab1.png);
@@ -394,12 +419,12 @@ h2 {
     margin-bottom: 50px;
 }
 
-.list{
+.list {
     line-height: 2;
     font-size: 16px;
 }
 
-.popup_text > button{
+.popup_text>button {
     position: absolute;
     right: 0;
     background-color: rgba(0, 0, 0, 0);
@@ -431,6 +456,8 @@ h2 {
 .section.fourth {
     background-image: url(../img/sec03.png);
     position: relative;
+    background-position: center center;
+
 }
 
 .text_div {
@@ -489,6 +516,8 @@ h2 {
 
 .section.fifth {
     background-image: url(../img/sec04.png);
+    background-position: center center;
+
 }
 
 .story {
@@ -567,6 +596,8 @@ h2 {
 .section.sixth {
     background-image: url(../img/sec05.png);
     position: relative;
+    background-position: center center;
+
 }
 
 .sec05_textbox>h2 {
@@ -647,6 +678,8 @@ h2 {
     overflow: hidden;
     align-items: center;
     justify-content: center;
+    background-position: center center;
+
 }
 
 
