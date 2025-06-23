@@ -120,6 +120,20 @@
         width: 820px;
     }
 
+    .story_text {
+        width: 504px;
+        padding: 40px 40px;
+
+    }
+
+    .cover {
+        width: 300px;
+        padding: 40px;
+    }
+
+    .cover>strong {
+        font-size: 32px;
+    }
 
     /* 책 속에서 여행은 어땠나요? */
     .sec05_textbox>h2 {
@@ -142,5 +156,57 @@
         height: 200px;
     }
 
-    
+
+}
+
+/* 모바일 뷰 */
+@media (max-width: 360px) {
+
+    /* 메인 */
+    .logo {
+        width: 110px;
+        margin: 0 auto;
+    }
+
+    .section.first {
+        background-position: 14%;
+    }
+
+    .main>div {
+        width: 280px;
+    }
+
+    .main>div>h1 {
+        font-size: 34px;
+    }
+
+    .content {
+        position: absolute;
+        font-size: 13px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 230px;
+        width: 240px;
+    }
+
+
+    .sec02_div{
+        display: block;
+    }
+
+    .page > figure{
+        display: none;
+
+    }
+
+    .sec02_pages .page {
+    width: 260px;
+    height: 400px;
+}
+
+.sec02_pages .page.active {
+    width: 260px;
+    height: 400px;
+}
+
 }
