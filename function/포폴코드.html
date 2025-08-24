@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 40px;
+            perspective: 600px;
+            background-color: rgb(125, 125, 125);
+            /* perspective : 3d 효과의 깊이 ( 원근감 )를 설정하는 효과 */
+            /* 3d 를 적용시킬 부모 요소에 적용함 */
+            /* 자식요소가 transform 변형을 할 때 어떻게 보일지를 설정 */
+            /* 값이 작다면 깊이감이 극대화됨 */
+        }
+
+        .card {
+            position: relative;
+            width: 300px;
+            height: 450px;
+            border-radius: 20px;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+            /* x,y,blur,color */
+            transform-style: preserve-3d;
+            /* 기본값은 flat(납작하다.) */
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            /* 천천히 움직이게 넣어준것 */
+        }
+        
+        .card.first {
+            background: url(./다람쥐배경.jpg);
+        }
+        .card.second {
+            background: url(./강아지배경.jpg);
+        }
+
+        .card_conent {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #fff;
+            transform: translateZ(100px);
+            /* translateY : 세로로 이동 */
+            /* translateX : 가로로 이동 */
+            /* translateZ : 안쪽으로 이동 : 깊이감을 표현한다. */
+        }
+
+        .card_conent > h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .card_conent > p {
+            margin: 20px 0;
+        }
+
+        .overlay_img {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            transform: translateZ(60px);
+        }
+    </style>
+</head>
+<body>
+    <div class="card first">
+        <div class="card_conent">
+            <h2>다람쥐의 일상</h2>
+            <p>저는 다람쓰 장풍을 날릴 수 있습니다.</p>
+        </div>
+        <img class="overlay_img" src="./다람쥐의장풍.png" alt="다람쥐장풍">
+    </div>
+    <div class="card second">
+        <div class="card_conent">
+            <h2>강아지의 일상</h2>
+            <p>간식 하나 얻어먹기 힘드네 참...</p>
+        </div>
+        <img class="overlay_img" src="./강아지이미지.png" alt="강아지이미지">
+    </div>
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+        console.log(cards);
+        cards.forEach(card =>{
+            card.addEventListener("mousemove", (e)=>{
+                const rect = card.getBoundingClientRect();
+                // top / x / Y / left / width, height 요소의 속성과 위치값을 알 수 있음
+                const x = e.clientX - rect.left;
+                //rect.left : 카드의 왼쪽 시작점
+                // e.clientX : 브라우저 창의 왼쪽을 기준으로 마우스의 X좌표
+                // rect.left : 200 / e.clientX : 350 = 150px
+                // 카드의 x 축을 기준으로 마우스가 어디에 있는가
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width/2;
+                const centerY = rect.height/2;
+                // 카드의 정중앙을 기준점으로 삼기 위해 폭, 높이를 /2해줌
+
+                const rotateX = -(y-centerY) /15;
+                const rotateY = (x-centerX)/15;
+                // x - centerX : 200 - 150 = 50/15 :
+                // x(마우스가 카드에서 얼마나 들어와있는가) : 200
+                // centerX : 카드의 가로중앙 ( 150 )
+
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                //3.33
+            });
+
+            card.addEventListener("mouseleave",()=>{
+                card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            })
+        });
+    </script>
+</body>
+</html>

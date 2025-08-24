@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시작텍스트인터랙션</title>
+    <style>
+        body {
+            background-color: black;
+            color: #fff;
+            height: 5000px;
+        }
+
+        .text_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .text_line {
+            display: flex;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .word {
+            opacity: 0;
+            transform: translateY(100%);
+            animation: textUp 0.6s forwards;
+            /* forwards : 애니메이션이 끝나고 유지됨 */
+            margin: 0px 15px;
+        }
+
+        @keyframes textUp {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text_container" id="text_container">
+        <div class="text_line word" id="line1"></div>
+        <div class="text_line word" id="line2"></div>
+        <div class="text_line word" id="line3"></div>
+    </div>
+
+    <script>
+        const line1Word = ["Timeless","Spaces,"]; // 윗줄에 넣을 단어들
+        const line2Word = ["Perfected","by","Trust"]; // 밑줄에 넣을 단어들
+        const line3Word = ["Perfected","bysdfsd","Trustfdsf"]; // 밑줄에 넣을 단어들
+
+        function animateLine(lineId,words,delayOffset){ // 몇번재 라인인지, 단어들(배열),지속시간
+            const line = document.getElementById(lineId);
+            words.forEach((word, index)=>{
+                // words로 받아온 매개변수(배열)을 반복할것
+                // 각각의 단어를 word로 접근할것이고 순서를 index로 접근할것이다
+                const span = document.createElement('span');
+                // span태그를 만들어줌
+                span.className = 'word';
+                span.textContent = word;
+                span.style.animationDelay = `${(index + delayOffset) * 0.3}s`;
+                // delayOffset : 이전 줄의 단어 개수를 기준으로 얼마나 더 늦게 시작할지 설정하는 값
+                // 0.3 : 애니메이션의 간격을 0.3 으로 설정
+                // Timeless : 첫번째 줄의 첫번째 단어
+                // 인덱스는 0, delayOffset 0 (0+0)*0.3=0
+                // Spaces : 첫번째 줄의 두번째 단어
+                // 인덱스는 1, delayOffset 0 (1 + 0) * 0.3 = 0.3초 딜레이될것
+                //Perfected : 두번째 줄의 첫번째 단어
+                // 인덱스는 0, delayOffset : 2 (0+2)*0.3 = 0.6
+                //by :두번째 줄의 두번째 글자
+                // 인덱스는 1, delayOffset : 2 (1 + 2) * 0.3 = 0.9
+                //Trust :두번째 줄의 세번째 글자
+                // 인덱스는 2, delayOffset : 2 (2 + 2) * 0.3 = 1.2
+
+                line.appendChild(span);
+            });
+        }
+
+        function playAnimation(){
+            animateLine('line1',line1Word,0);
+            animateLine('line2',line2Word,line1Word.length);
+            animateLine('line3',line3Word,line2Word.length);
+        }
+
+        const textContainer = document.getElementById('text_container');
+        function resetAnimation(){
+            document.getElementById('line1').innerHTML = '';
+            document.getElementById('line2').innerHTML = '';
+            document.getElementById('line3').innerHTML = '';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            //observer : 화면에 들어온 요소가 있는지 감지한다. 들어왔는지 나갔는지 등등
+            //entries : IntersectionObserver의 배열로 관찰 대상 요소가 하나거나 여러개인 경우 요소들을 배열로 넘겨준다. 
+            entries.forEach(entry =>{
+                if(entry.isIntersecting){
+                    //entry.isIntersecting === true : 화면 안에 들어온 상태
+                    playAnimation();
+                }else {
+                    //entry.isIntersecting === false : 화면 안에 들어오지 않은 상태
+                    resetAnimation();
+                }
+            });
+        },{
+            threshold:0.5
+            // 요소의 절반 이상이 화면에 보여야지만 움직인 요소로 인식되어 entries배열에 들어가도록 설정
+        });
+
+        observer.observe(textContainer);
+
+    </script>
+</body>
+</html>

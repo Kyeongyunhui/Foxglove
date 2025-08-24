@@ -98,20 +98,24 @@
     /* 잊힌 작가의 공간 */
 
     .text_div {
-        top: 68%;
+        top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 800px;
-        height: 800px;
+        width: 640px;
+        height: 300px;
     }
 
     .text_div>div {
         margin: 20px 0;
     }
 
+    .main_div:nth-child(2)>.sub_div>p {
+        font-size: 16px;
+    }
+
     .text_div p {
-        font-size: 30px;
-        padding: 32px 5px;
+        font-size: 20px;
+        padding: 12px 5px;
     }
 
     /* 오늘의 추천 이야기 */
@@ -185,28 +189,100 @@
         font-size: 13px;
         left: 50%;
         transform: translateX(-50%);
-        bottom: 230px;
+        bottom: 360px;
         width: 240px;
     }
 
 
-    .sec02_div{
+    .sec02_div {
         display: block;
+        position: absolute;
+        transform: translateX(-15%);
+        left: 50%;
     }
 
-    .page > figure{
+    .page>figure {
         display: none;
 
     }
 
     .sec02_pages .page {
-    width: 260px;
-    height: 400px;
+        width: 260px;
+        height: 500px;
+    }
+
+    .sec02_pages .page.active {
+        width: 260px;
+        height: 500px;
+    }
+
+    .tab_div>ul {
+        display: flex;
+        position: absolute;
+        top: -65px;
+    }
+
+    .tab_div>ul>li {
+        width: 65px;
+        height: 65px;
+    }
+
+    .tab_div>ul>li>p {
+        font-size: 0;
+        line-height: 65px;
+    }
+
+    .page_text {
+        width: 600px;
+        height: 400px;
+        margin: 40px 20px;
+    }
+
+    .page_text>h3 {
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 40px;
+    }
+
+    .page_text>strong {
+        font-size: 14px;
+    }
+
+    .page_text>p {
+        font-size: 11px;
+        margin-top: 100px;
+        line-height: 20px;
+    }
+
+    .page_text>p>span {
+        font-size: 12px;
+    }
+
+.text_div {
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 500px;
+    position: absolute;
+    text-align: center;
 }
 
-.sec02_pages .page.active {
-    width: 260px;
-    height: 400px;
+.text_div>.main_div {
+    justify-content: space-between;
+    align-items: center;
+    display: block;
+    margin: 40px 0;
 }
+
+.text_div>.main_div>.sub_div {
+    margin-left: 40px;
+    display: flex;
+    width: 600px;
+    justify-content: start;
+}
+    .sub_div>p {
+        font-size: 16px;
+    }
 
 }
