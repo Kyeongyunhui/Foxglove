@@ -34,6 +34,17 @@ body {
     /* 스크롤바 없앰 */
 }
 
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Firefox */
+body {
+    scrollbar-width: none;
+}
+
 .container {
     width: 100%;
     height: 100vh;
@@ -212,7 +223,7 @@ h2 {
     width: 1165px;
     justify-content: space-between;
     margin: 0 auto;
-    margin-top: 160px;
+    margin-top: 80px;
 }
 
 .tab_div>ul>li {
@@ -528,6 +539,7 @@ h2 {
 
 }
 
+
 .story {
     position: relative;
     width: 1060px;
@@ -536,10 +548,16 @@ h2 {
     margin-top: 240px;
 }
 
+.story_mobile {
+    display: none;
+}
+
+
+
 .story_div {
     position: absolute;
     display: flex;
-    top: 0;
+    top: -100px;
     left: 0;
     width: 100%;
     opacity: 0;
@@ -585,11 +603,78 @@ h2 {
 }
 
 .story_text {
-    width: 604px;
+    display: table;
+    width: 600px;
+    height: 500px;
     padding: 40px 40px;
     line-height: 30px;
     background-color: rgba(0, 0, 0, 0.5);
     font-size: 20px;
+    font-family: 'ChosunCentennial';
+    font-weight: normal;
+    position: relative;
+}
+
+.story_text_in{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+/* 모바일 스토리 */
+
+.story_div_m {
+    position: absolute;
+    display: flex;
+    top: 180px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    z-index: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.story_div_m.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.cover_m {
+    width: 246px;
+    height: 474px;
+    padding: 40px;
+    position: relative;
+    margin: auto;
+}
+
+.cover_m>strong {
+    font-family: 'ChosunCentennial';
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.cover_m>p {
+    position: absolute;
+    font-size: 18px;
+    right: 40px;
+    bottom: 40px;
+}
+
+.story_div_m:nth-child(1)>.cover_m {
+    background-image: url(../img/sec04_1.png);
+    background-position : center;
+
+}
+
+
+.story_text_m {
+    width: 246px;
+    height: 474px;
+    margin: 0px 40px;
+    padding: 40px 40px;
+    line-height: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
     font-family: 'ChosunCentennial';
     font-weight: normal;
     position: relative;

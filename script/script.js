@@ -1,118 +1,106 @@
-const container  = document.querySelector('.container');
-const sections   = document.querySelectorAll('.section');
-
-let currentSection   = 0;   // 풀페이지 모드에서만 의미 있음
-let isFullpage       = false;
-let fullpageWheelRef = null;  // wheel 핸들러 참조 저장
-let sec1WheelRef     = null;  // section[1] wheel 핸들러 참조 저장
-
-/* ------------------------------------------------------------------
-   풀페이지 모드 ON / OFF
------------------------------------------------------------------- */
-function enableFullpage() {
-  if (isFullpage) return;          // 이미 켜져 있으면 무시
-  isFullpage = true;
-
-  // 시각적·스크롤 세팅
-  container.style.transition = 'transform 0.7s ease-in-out';
-  document.body.style.overflow = 'hidden';
-  moveSection();                   // 현재 섹션 위치 적용
-
-  /* 풀페이지 전용 wheel 핸들러 */
-  fullpageWheelRef = function (e) {
-    e.preventDefault();            // 휠 스크롤 자체를 막음
-    if (isScrolling) return;
-    isScrolling = true;
-
-    if (e.deltaY > 0 && currentSection < sections.length - 1) {
-      currentSection++;
-    } else if (e.deltaY < 0 && currentSection > 0) {
-      currentSection--;
-    }
-
-    moveSection();
-    setTimeout(() => (isScrolling = false), 700);
-  };
-
-  /* 두 번째 섹션 wheel↑ → 맨 위로 (풀페이지 전용) */
-  sec1WheelRef = function (e) {
-    if (e.deltaY < 0) {
-      e.preventDefault();
-      currentSection = 0;
-      moveSection();
-    }
-  };
-
-  window.addEventListener('wheel', fullpageWheelRef, { passive: false });
-  sections[1].addEventListener('wheel', sec1WheelRef, { passive: false });
-}
-
-function disableFullpage() {
-  if (!isFullpage) return;         // 이미 꺼져 있으면 무시
-  isFullpage = false;
-
-  // 시각적·스크롤 세팅
-  container.style.transition = 'none';
-  container.style.transform  = 'none';
-  document.body.style.overflow = 'auto';
-
-  // wheel 리스너 제거
-  if (fullpageWheelRef) {
-    window.removeEventListener('wheel', fullpageWheelRef);
-    fullpageWheelRef = null;
-  }
-  if (sec1WheelRef) {
-    sections[1].removeEventListener('wheel', sec1WheelRef);
-    sec1WheelRef = null;
-  }
-}
-
-/* ------------------------------------------------------------------
-   창 크기 체크 → 모드 전환
------------------------------------------------------------------- */
-function checkScreenSize() {
-  if (window.innerWidth > 1920) {
-    enableFullpage();
-  } else {
-    disableFullpage();
-  }
-}
-window.addEventListener('resize', checkScreenSize);
-window.addEventListener('load',   checkScreenSize);
-
-/* ------------------------------------------------------------------
-   공통 버튼 (GO IN, down_button) : 다음 섹션 이동
------------------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
-  const goInBtn  = document.querySelector('.main button');
-  const downBtn  = document.querySelector('.down_button');
-
-  function goNext() {
-    // 풀페이지 모드
-    if (isFullpage) {
-      if (currentSection < sections.length - 1) {
-        currentSection++;
-        moveSection();
-      }
-    }
-    // 반응형 모드(자연 스크롤)
-    else {
-      const next = sections[currentSection + 1];
-      if (next) next.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  goInBtn  && goInBtn.addEventListener('click', goNext);
-  downBtn  && downBtn.addEventListener('click', goNext);
-});
-
-/* ------------------------------------------------------------------
-   섹션 이동 (풀페이지 모드 한정)
------------------------------------------------------------------- */
+let currentSection = 0;
 let isScrolling = false;
-function moveSection() {
-  container.style.transform = `translateY(-${currentSection * 100}vh)`;
+let isFullpage = false;
+
+const sections = document.querySelectorAll(".section");
+const container = document.querySelector(".container");
+const totalSections = sections.length;
+
+// =============================
+// 섹션 이동 함수
+// =============================
+function moveToSection(index) {
+    if (!isFullpage) return; // 풀페이지 아닐 땐 실행 X
+    if (index < 0 || index >= totalSections) return;
+
+    isScrolling = true;
+    currentSection = index;
+
+    container.style.transform = `translateY(${-index * 100}vh)`;
+
+    setTimeout(() => {
+        isScrolling = false;
+    }, 800);
 }
+
+// =============================
+// 휠 이벤트 핸들러 (풀페이지 전용)
+// =============================
+function fullpageWheel(e) {
+    if (!isFullpage) return;
+    if (isScrolling) return;
+
+    if (e.deltaY > 0) moveToSection(currentSection + 1);
+    else moveToSection(currentSection - 1);
+}
+
+// =============================
+// 버튼 이동
+// =============================
+function setupButtons() {
+    const goInBtn = document.querySelector(".first button");
+    const downBtn = document.querySelector(".down_button");
+
+    if (goInBtn) {
+        goInBtn.onclick = () => {
+            if (isFullpage) moveToSection(1);
+        };
+    }
+
+    if (downBtn) {
+        downBtn.onclick = () => {
+            if (isFullpage) moveToSection(2);
+        };
+    }
+}
+
+setupButtons();
+
+// =============================
+// 풀페이지 활성화
+// =============================
+function enableFullpage() {
+    if (isFullpage) return;
+
+    isFullpage = true;
+    document.body.style.overflow = "hidden";
+    container.style.transition = "transform 0.8s ease";
+    moveToSection(currentSection);
+
+    window.addEventListener("wheel", fullpageWheel, { passive: true });
+}
+
+// =============================
+// 풀페이지 비활성화
+// =============================
+function disableFullpage() {
+    if (!isFullpage) return;
+
+    isFullpage = false;
+    document.body.style.overflow = "auto";
+    container.style.transition = "none";
+    container.style.transform = "none";
+
+    window.removeEventListener("wheel", fullpageWheel);
+}
+
+// =============================
+// 화면 크기 체크 → 모드 전환
+// =============================
+function checkScreenSize() {
+    if (window.innerWidth >= 1920) {
+        enableFullpage();
+    } else {
+        disableFullpage();
+    }
+}
+
+window.addEventListener("resize", checkScreenSize);
+window.addEventListener("load", checkScreenSize);
+
+
+
+
 
 
 // 탭메뉴
@@ -146,6 +134,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     const stories = document.querySelectorAll(".story_div");
+    let current = 0;
+
+    function showSlide(index) {
+        stories.forEach((el, i) => {
+            el.classList.remove("active");
+        });
+        stories[index].classList.add("active");
+    }
+
+    setInterval(() => {
+        current = (current + 1) % stories.length;
+        showSlide(current);
+    }, 7000); // 4초 간격 (1.5초 fade 포함 고려)
+});
+
+// 페이드인/아웃_모바일
+
+document.addEventListener("DOMContentLoaded", function () {
+    const stories = document.querySelectorAll(".story_div_m");
     let current = 0;
 
     function showSlide(index) {

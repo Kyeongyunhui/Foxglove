@@ -50,7 +50,7 @@
     .sec02_div {
         width: 852px;
         height: 540px;
-        margin-top: 170px;
+        margin-top: 120px;
     }
 
     .sec02_pages .page.active {
@@ -139,6 +139,12 @@
         font-size: 32px;
     }
 
+    .story_div:nth-child(1)>.cover {
+        background-image: url(../img/sec04_1.png);
+        background-position: center;
+
+    }
+
     /* 책 속에서 여행은 어땠나요? */
     .sec05_textbox>h2 {
         margin: 0;
@@ -152,7 +158,7 @@
     }
 
     .book_animate {
-        bottom: 180px;
+        bottom: 100px;
     }
 
     .book_animate>ul>li {
@@ -258,31 +264,123 @@
         font-size: 12px;
     }
 
-.text_div {
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 500px;
-    position: absolute;
-    text-align: center;
-}
+    .text_div {
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 500px;
+        position: absolute;
+        text-align: center;
+    }
 
-.text_div>.main_div {
-    justify-content: space-between;
-    align-items: center;
-    display: block;
-    margin: 40px 0;
-}
+    .text_div>.main_div {
+        justify-content: space-between;
+        align-items: center;
+        display: block;
+        margin: 40px 0;
+    }
 
-.text_div>.main_div>.sub_div {
-    margin-left: 40px;
-    display: flex;
-    width: 600px;
-    justify-content: start;
-}
+    .text_div>.main_div>.sub_div {
+        margin-left: 40px;
+        display: flex;
+        width: 600px;
+        justify-content: start;
+    }
+
     .sub_div>p {
         font-size: 16px;
+    }
+
+    /* 오늘의 추천 이야기 */
+
+    .story {
+        width: 820px;
+    }
+
+    .story_text {
+        width: 504px;
+        padding: 40px 40px;
+
+    }
+
+    .cover {
+        width: 300px;
+        padding: 40px;
+    }
+
+    .cover>strong {
+        font-size: 32px;
+    }
+
+    .story {
+        display: none;
+    }
+
+    .story_mobile {
+        display: block;
+    }
+
+    /* 책 속에서 여행은 어땠나요? */
+
+
+
+    .sec05_textbox>h2 {
+        margin: 0;
+        margin-bottom: 50px;
+        font-size: 22px;
+
+    }
+
+    .book_animate {
+        bottom: 80px;
+    }
+
+    .sec05_textbox>p {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .book_animate {
+        bottom: 180px;
+    }
+
+    .book_animate>ul {
+        gap: 20px;
+    }
+
+    .book_animate>ul>li {
+        width: 90px;
+        height: 150px;
+    }
+
+    /* 출구는 없습니다. */
+
+    .sec06_text {
+        font-size: 32px;
+        font-family: 'ChosunCentennial';
+        font-weight: normal;
+        position: relative;
+    }
+
+    .sec06_text::before,
+    .sec06_text::after {
+        content: attr(data-text);
+        position: absolute;
+        width: 100%;
+        transition: clip-path 50ms ease-in;
+    }
+
+    .sec06_text::before {
+        left: 2px;
+        text-shadow: 2px -2px #000000;
+        clip-path: polygon(0 var(--t1), 100% var(--t1), 100% var(--b1), 0 var(--b1));
+    }
+
+    .sec06_text::after {
+        left: -2px;
+        text-shadow: -2px 2px #b9b9b9;
+        clip-path: polygon(0 var(--t2), 100% var(--t2), 100% var(--b2), 0 var(--b2));
     }
 
 }
