@@ -27,11 +27,15 @@
 }
 
 html,
-body {
+body.fullpageMode {
     width: 100%;
     height: 100%;
     overflow: hidden;
     /* 스크롤바 없앰 */
+}
+
+body.Normalmode {
+    overflow: auto;
 }
 
 /* Chrome, Edge, Safari */

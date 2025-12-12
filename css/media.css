@@ -31,7 +31,7 @@
     /* 첫번째세션-소개페이지 */
 
     .sec01_textBox>h2 {
-        font-size: 34px;
+        font-size: 28px;
     }
 
     .sec01_textBox>p {
@@ -199,6 +199,45 @@
         width: 240px;
     }
 
+    /* 팝업 */
+
+    .popup {
+        width: 280px;
+        height: 400px;
+        border-style: none;
+    }
+
+    .popup_text {
+        position: absolute;
+        left: 10%;
+        top: 10%;
+        width: 200px;
+    }
+
+    .popup_bg::before {
+        content: "";
+        opacity: 0.5;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: #000;
+    }
+
+    .about {
+
+        color: #b9b9b9;
+
+    }
+
+    .popup_text>strong {
+        color: #b9b9b9;
+    }
+
+    .list {
+        font-size: 12px;
+    }
 
     .sec02_div {
         display: block;
